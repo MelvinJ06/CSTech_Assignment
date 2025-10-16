@@ -102,7 +102,6 @@ export const uploadAndDistribute = (req, res) => {
         assignments.push({ agent: agents[i], items });
       }
 
-      // Save to DB
       for (const assign of assignments) {
         for (const item of assign.items) {
           await List.create({

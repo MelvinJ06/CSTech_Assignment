@@ -5,18 +5,15 @@ export const addAgent = async (req, res) => {
   try {
     const { name, email, mobile, password } = req.body;
 
-    // Validation
     if (!name || !email || !mobile || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Check duplicate email
     const existing = await Agent.findOne({ email });
     if (existing) {
       return res.status(400).json({ message: "Agent with this email already exists" });
     }
 
-    // Hash password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const agent = await Agent.create({
@@ -41,7 +38,6 @@ export const getAgents = async (req, res) => {
   }
 };
 
-// UPDATE AGENT
 export const updateAgent = async (req, res) => {
   try {
     const { name, email, mobile, password } = req.body;
@@ -64,7 +60,6 @@ export const updateAgent = async (req, res) => {
   }
 };
 
-// DELETE AGENT
 export const deleteAgent = async (req, res) => {
   try {
     const agent = await Agent.findById(req.params.id);
