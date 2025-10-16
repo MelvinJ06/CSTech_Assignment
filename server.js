@@ -12,7 +12,11 @@ connectDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ["https://cstechassignment.netlify.app"], 
+  credentials: true, 
+}));
+
 app.use("/uploads", express.static("uploads"));
 
 app.use("/api/auth", authRoutes);
